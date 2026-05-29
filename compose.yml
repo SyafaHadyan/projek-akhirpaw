@@ -1,0 +1,16 @@
+services:
+  nginx:
+    image: syafa/project-paw:nginx-latest
+    restart: always
+    container_name: nginx-php
+    ports:
+      - "8080:80"
+    depends_on:
+      - php
+
+  php:
+    image: syafa/project-paw:php-latest
+    restart: always
+    container_name: php
+    env_file:
+      - .env
