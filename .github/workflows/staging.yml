@@ -1,0 +1,24 @@
+name: CD - Staging
+
+on:
+  pull_request:
+    branches: ["*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-image-nginx:
+    name: Build & Push Nginx Image
+    uses: ./.github/workflows/image-nginx.yml
+    with:
+      tag: nginx-staging
+    secrets: inherit
+
+  build-image-php:
+    name: Build & Push PHP Image
+    uses: ./.github/workflows/image-php.yml
+    with:
+      tag: php-staging
+    secrets: inherit
